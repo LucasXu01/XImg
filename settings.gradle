@@ -1,0 +1,3 @@
+rootProject.name = "XImg"
+include ':app'
+include ':library'
