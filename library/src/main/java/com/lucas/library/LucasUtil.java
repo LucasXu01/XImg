@@ -1,6 +1,6 @@
 package com.lucas.library;
 
-class LucasUtil {
+public class LucasUtil {
     public static String getHello(){
         return "123";
     }
