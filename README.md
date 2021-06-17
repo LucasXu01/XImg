@@ -26,10 +26,9 @@ dependencies {
 
 How do I use ?
 -------------------
-'''java
+```java
  XImg.getIns().loadImg(img_view, "图片地址");
-
-'''
+```
 
 * ### 相关方法
 ```
