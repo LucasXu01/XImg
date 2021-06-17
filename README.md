@@ -26,12 +26,18 @@ dependencies {
 
 How do I use ?
 -------------------
+'''java
+ XImg.getIns().loadImg(img_view, "图片地址");
+
+'''
+
 * ### 相关方法
 ```
 loadImg                         : 加载图
 loadImgCircle                   : 加载圆形图（可设置全圆、边角弧度、间距）
 loadImgBlur                     : 加载高斯模糊图
-displayImageForViewGroup        : 为ViewGroup加载图片
-displayImageForTarget           : 为非view加载图片
-displayImageForNotification     : 为notification加载图片
+loadImg4ViewGroup               : 为ViewGroup加载图片
+loadImg4ViewGroupBlur           : 为ViewGroup加载模糊图片
+loadImg4Target                  : 为非view加载图片
+loadImg4Notification            : 为notification加载图片
 ```

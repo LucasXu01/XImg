@@ -37,6 +37,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 
-    implementation 'com.github.LucasXu01:XImg:0.0.3'
-//    implementation project(path: ':library')
+//    implementation 'com.github.LucasXu01:XImg:0.0.3'
+    implementation project(path: ':library')
 }

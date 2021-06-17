@@ -3,7 +3,7 @@ package com.lucas.library;
 import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -29,13 +29,13 @@ import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.wi
 
 /**
  * author : 许进进
- * time   : 2021/6/19 12:41 PM
+ * time   : 2021/6/16 12:41 PM
  * des    : 图处加载类
  * 支持为view,notifaication,appwidget加载图片
  */
 public final class XImg {
 
-    public static XImg getInstance() {
+    public static XImg getIns() {
         return SingletonHolder.instance;
     }
 
@@ -110,24 +110,49 @@ public final class XImg {
     }
 
 
-    public void displayImageForViewGroup(final ViewGroup group, String url) {
+    public void loadImg4ViewGroup(final ViewGroup group, String url) {
         Glide.with(group.getContext())
-                .asBitmap()
+                .asDrawable()
                 .load(url)
                 .apply(initCommonRequestOption())
-                .into(new SimpleTarget<Bitmap>() {//设置宽高
+                .into(new SimpleTarget<Drawable>() {
                     @Override
-                    public void onResourceReady(@NonNull Bitmap resource,
-                                                @Nullable Transition<? super Bitmap> transition) {
-                        final Bitmap res = resource;
-                        group.setBackground((new BitmapDrawable(res)));
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        group.setBackground(resource);
+                    }
+                });
+    }
+
+    public void loadImg4ViewGroupBlur(final ViewGroup group, String url) {
+        Glide.with(group.getContext())
+                .asDrawable()
+                .load(url)
+                .apply(initCommonRequestOption())
+                .apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 10)))
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        group.setBackground(resource);
+                    }
+                });
+    }
+    public void loadImg4ViewGroupBlur(final ViewGroup group, String url,  int radius, int sampling) {
+        Glide.with(group.getContext())
+                .asDrawable()
+                .load(url)
+                .apply(initCommonRequestOption())
+                .apply(RequestOptions.bitmapTransform(new BlurTransformation(radius, sampling)))
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        group.setBackground(resource);
                     }
                 });
     }
 
 
     // 为非view加载图片
-    private void displayImageForTarget(Context context, Target target, String url) {
+    private void loadImg4Target(Context context, Target target, String url) {
         Glide.with(context)
                 .asBitmap()
                 .load(url)
@@ -139,7 +164,7 @@ public final class XImg {
 
     // 为notification加载图片
     public void displayImageForNotification(Context context, RemoteViews rv, int id, Notification notification, int NOTIFICATION_ID, String url) {
-        this.displayImageForTarget(context, initNotificationTarget(context, id, rv, notification, NOTIFICATION_ID), url);
+        this.loadImg4Target(context, initNotificationTarget(context, id, rv, notification, NOTIFICATION_ID), url);
     }
 
 
