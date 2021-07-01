@@ -48,12 +48,21 @@ public final class XImg {
     public void loadImg(ImageView imageView, String url) {
         this.loadImg(imageView, url, null);
     }
+    public void loadImg(ImageView imageView, Drawable drawable) { this.loadImg(imageView, drawable, null); }
 
     //带回调的加载图片方法  待实现
     public void loadImg(ImageView imageView, String url, Object object) {
         Glide.with(imageView.getContext())
                 .asBitmap()
                 .load(url)
+                .apply(initCommonRequestOption())
+                .transition(withCrossFade())
+                .into(imageView);
+    }
+    public void loadImg(ImageView imageView, Drawable drawable, Object object) {
+        Glide.with(imageView.getContext())
+                .asBitmap()
+                .load(drawable)
                 .apply(initCommonRequestOption())
                 .transition(withCrossFade())
                 .into(imageView);

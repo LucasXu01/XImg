@@ -20,14 +20,14 @@ allprojects {
 Step 2. Add the dependency
 ```gradle
 dependencies {
-	        implementation 'com.github.LucasXu01:XImg:0.0.3'
+	        implementation 'com.github.LucasXu01:XImg:0.0.5'
 	}
 ```
 
 How do I use ?
 -------------------
 ```java
- XImg.getIns().loadImg(img_view, "图片地址");
+ XImg.getIns().loadImg(img_view, "img_url");
 ```
 
 * ### 相关方法
